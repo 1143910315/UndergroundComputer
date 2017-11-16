@@ -87,4 +87,7 @@ public class GetUndergroundInformation {
 	public int getMoney() {
 		return price;
 	}
+	public ArrayList<String> getStationName() {
+		return stationName;
+	}
 }

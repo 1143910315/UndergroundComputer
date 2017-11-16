@@ -7,6 +7,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 public class GetUndergroundInformationTest {
 	private String from;
 	private String to;
-	private Integer expected;
+	private int expected;
 	private List<String> stationName;
 	private GetUndergroundInformation getUndergroundInformation;
 	@Test
@@ -23,8 +24,13 @@ public class GetUndergroundInformationTest {
 		while (times < 5 && !getUndergroundInformation.connection()) {
 			times++;
 		}
-		Assert.assertTrue(times < 5);
-		Assert.assertEquals(from + "到" + to, expected, Integer.valueOf(getUndergroundInformation.getMoney()));
+		Assert.assertTrue("数据请求失败！", times < 5);
+		Assert.assertEquals(from + "到" + to + "的票价不一致！", expected, getUndergroundInformation.getMoney());
+		ArrayList<String> stationNameData = getUndergroundInformation.getStationName();
+		Assert.assertEquals("换乘站数不一致！", stationName.size(), stationNameData.size());
+		for (int i = 0; i < stationName.size(); i++) {
+			Assert.assertEquals("第" + (i + 1) + "个站不正确！", stationName.get(i), stationNameData.get(i));
+		}
 	}
 	@Parameters
 	public static Collection<Object[]> getParams() {
@@ -41,8 +47,8 @@ public class GetUndergroundInformationTest {
 			throws UnsupportedEncodingException {
 		this.from = (String) from;
 		this.to = (String) to;
-		this.expected = (Integer) expected;
-		this.stationName= (List<String>) stationName;
+		this.expected = (int) expected;
+		this.stationName = (List<String>) stationName;
 		getUndergroundInformation = new GetUndergroundInformation(this.from, this.to);
 	}
 }
