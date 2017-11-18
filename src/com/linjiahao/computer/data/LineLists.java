@@ -1,8 +1,83 @@
 package com.linjiahao.computer.data;
+import java.io.*;
 import java.util.ArrayList;
 public class LineLists {
 	private ArrayList<Line> line = new ArrayList<>();
-	public LineLists() {
+	public boolean load() {
+		File dataFile = new File("data");
+		if (dataFile.isDirectory()) {
+			line.clear();
+			int i = 0;
+			File data = new File(dataFile, "line" + i++ + ".dat");
+			while (data.isFile()) {
+				FileInputStream fileInputStream = null;
+				ObjectInputStream objectInputStream = null;
+				try {
+					fileInputStream = new FileInputStream(data);
+					objectInputStream = new ObjectInputStream(fileInputStream);
+					line.add((Line) objectInputStream.readObject());
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					if (objectInputStream != null) {
+						try {
+							objectInputStream.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					if (fileInputStream != null) {
+						try {
+							fileInputStream.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				data = new File(dataFile, "line" + i++ + ".dat");
+			}
+			return true;
+		}
+		return false;
+	}
+	public boolean save() {
+		File dataFile = new File("data");
+		if (!dataFile.isDirectory()) {
+			if (!dataFile.mkdir()) {
+				return false;
+			}
+		}
+		for (int i = 0; i < line.size(); i++) {
+			File data = new File(dataFile, "line" + i + ".dat");
+			FileOutputStream fileOutputStream = null;
+			ObjectOutputStream objectOutputStream = null;
+			try {
+				fileOutputStream = new FileOutputStream(data);
+				objectOutputStream = new ObjectOutputStream(fileOutputStream);
+				objectOutputStream.writeObject(line.get(i));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				if (objectOutputStream != null) {
+					try {
+						objectOutputStream.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				if (fileOutputStream != null) {
+					try {
+						fileOutputStream.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return true;
+	}
+	public void loadDefault() {
+		line.clear();
 		line.add(new Line().add("广州东站").add("体育中心").add("体育西路").add("杨箕").add("东山口").add("烈士陵园").add("农讲所").add("公园前")
 				.add("西门口").add("陈家祠").add("长寿路").add("黄沙").add("芳村").add("花地湾").add("坑口").add("西朗"));
 		line.add(new Line().add("嘉禾望岗").add("黄边").add("江夏").add("萧岗").add("白云文化广场").add("白云公园").add("飞翔公园").add("三元里")
@@ -42,6 +117,15 @@ public class LineLists {
 		line.add(new Line().add("燕岗").add("沙园").add("沙涌").add("鹤洞").add("西朗").add("菊树").add("龙溪").add("金融高新区")
 				.add("千灯湖").add("虫雷 岗").add("南桂路").add("桂城").add("朝安").add("普君北路").add("祖庙").add("同济路").add("季华园")
 				.add("魁奇路").add("澜石").add("世纪莲").add("东平").add("新城东"));
+	}
+	public String getStationName(int lineIndex, int stationIndex) {
+		return line.get(lineIndex).getStationName(stationIndex);
+	}
+	public int getLineCount() {
+		return line.size();
+	}
+	public int getStationCount(int lineIndex) {
+		return line.get(lineIndex).size();
 	}
 }
 

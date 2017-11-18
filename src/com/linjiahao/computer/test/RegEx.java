@@ -1,6 +1,7 @@
 package com.linjiahao.computer.test;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class RegEx {
@@ -14,5 +15,14 @@ public class RegEx {
 		while (matcher.find()) {
 			System.out.println(matcher.group(1));
 		}
+	}
+	@Test
+	public void getRuntimePath() throws Exception {
+		File file=new File("");
+		System.out.println(file.getAbsolutePath());
+		System.out.println(file.getAbsoluteFile());
+		File file1=new File("data");
+		System.out.println(file1.getAbsolutePath());
+		System.out.println(file1.getAbsoluteFile());
 	}
 }

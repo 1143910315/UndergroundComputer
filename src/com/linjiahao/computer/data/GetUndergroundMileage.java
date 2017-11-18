@@ -5,16 +5,15 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.file.NotLinkException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-public class GetUndergroundInformation {
+public class GetUndergroundMileage {
 	private String startStation;
 	private String endStation;
 	private ArrayList<String> stationName = null;
 	private int price = -1;
-	public GetUndergroundInformation(String startStation, String endStation) throws UnsupportedEncodingException {
+	public GetUndergroundMileage(String startStation, String endStation) throws UnsupportedEncodingException {
 		this.startStation = URLEncoder.encode(URLEncoder.encode(startStation, "UTF-8"), "UTF-8");
 		this.endStation = URLEncoder.encode(URLEncoder.encode(endStation, "UTF-8"), "UTF-8");
 	}
