@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2017年11月18日16时21分11秒 林嘉豪 All rights reserved.
+ */
+
 package com.linjiahao.computer.data;
 import java.io.Serializable;
 import java.util.ArrayList;

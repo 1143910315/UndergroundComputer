@@ -1,10 +1,13 @@
-package com.linjiahao.computer.test;
+/*
+ * Copyright (c) 2017年11月19日21时37分29秒 林嘉豪 All rights reserved.
+ */
+package com.linjiahao.computer.codetest;
 import org.junit.Test;
 
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-public class RegEx {
+public class CodeTest {
 	@Test
 	public void testGroup() throws Exception {
 		final String stationName = "[\\s\\S]*?\"stationName\":\"([\\s\\S]*?)\"";
@@ -18,10 +21,10 @@ public class RegEx {
 	}
 	@Test
 	public void getRuntimePath() throws Exception {
-		File file=new File("");
+		File file = new File("");
 		System.out.println(file.getAbsolutePath());
 		System.out.println(file.getAbsoluteFile());
-		File file1=new File("data");
+		File file1 = new File("data");
 		System.out.println(file1.getAbsolutePath());
 		System.out.println(file1.getAbsoluteFile());
 	}

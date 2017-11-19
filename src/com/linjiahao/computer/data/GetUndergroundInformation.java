@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2017年11月19日22时00分08秒 林嘉豪 All rights reserved.
+ */
+
 package com.linjiahao.computer.data;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,7 +9,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.file.NotLinkException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,0 +1,7 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="allowReplaceRegexp" value="- (.*)" />
+    <option name="notice" value="Copyright (c) &amp;#36;file.lastModified.format(&quot;yyyy年MM月dd日HH时mm分ss秒&quot;) 林嘉豪 All rights reserved." />
+    <option name="myName" value="MyCode" />
+  </copyright>
+</component>

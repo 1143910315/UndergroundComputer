@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2017年11月18日23时53分36秒 林嘉豪 All rights reserved.
+ */
+
 package com.linjiahao.computer.data;
 import java.io.*;
 import java.util.ArrayList;
