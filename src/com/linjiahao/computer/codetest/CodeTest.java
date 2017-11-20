@@ -28,4 +28,12 @@ public class CodeTest {
 		System.out.println(file1.getAbsolutePath());
 		System.out.println(file1.getAbsoluteFile());
 	}
+	@Test
+	public void testEnumTest() throws Exception {
+		//EnumTest enumTest = new EnumTest(5);
+		EnumTest enumTest = new EnumTest(Grade.A);
+		System.out.println(enumTest.getI());
+		EnumTest enumTest1 = new EnumTest(Grade.b);
+		System.out.println(enumTest1.getI());
+	}
 }
