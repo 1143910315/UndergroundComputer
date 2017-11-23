@@ -110,45 +110,41 @@ public class JsonDecode implements JsonData {
 			if (!limitScope(scope,'{','}')) {
 				return this;
 			}
-			start=scope.start;
+			start =scope.start;
 			end=scope.end;
-			StringBuilder stringBuilder = new StringBuilder();
-			int arrayIndex = 0;
-			int objectLevel = 0;
-			int arrayLevel = 0;
-			boolean isString = false;
+			StringBuilder keyStringBuilder = new StringBuilder();
+			StringBuilder valueStringBuilder = new StringBuilder();
+			int state=0;
+			boolean skip=false;
 			while (++start < end) {
 				char c = json.charAt(start);
-				if (c == '\"') {
-					isString = !isString;
-				}
-				if (!isString) {
-					if (arrayLevel == 0) {
-						if (c == '{') {
-							objectLevel++;
-						}
-						if (c == '}') {
-							objectLevel--;
-						}
+				if (state==0){
+					 if (!skip&&c=='\"'){
+					 	state=1;
+					 	continue;
+					 }
+					 if (skip){skip=false;}else if (c=='\\'){skip=true;}
+				}else if (state==1){
+					if (!skip&&c=='\"'){
+						state=2;
+						continue;
 					}
-					if (objectLevel == 0) {
-						if (c == '[') {
-							arrayLevel++;
-						}
-						if (c == ']') {
-							arrayLevel--;
-						}
+					if (skip){skip=false;}else if (c=='\\'){skip=true;}
+					keyStringBuilder.append(c);
+				}else if (state==2){
+					if (!skip&&c==':'){
+						state=3;
+						continue;
 					}
+					if (skip){skip=false;}else if (c=='\\'){skip=true;}
+				}else if (state==3){
+					if (!skip&&c=='\"'){
+						state=4;
+						continue;
+					}
+					if (skip){skip=false;}else if (c=='\\'){skip=true;}
 				}
-				if (c == ',' && objectLevel == 0 && arrayLevel == 0) {
-					arrayIndex++;
-					continue;
-				}
-				//if (arrayIndex == index) {
-				//	stringBuilder.append(c);
-				//} else if (arrayIndex > index) {
-				//	break;
-				//}
+				
 			}
 			return new JsonDecode(this, stringBuilder.toString());
 		} catch (Exception e) {
